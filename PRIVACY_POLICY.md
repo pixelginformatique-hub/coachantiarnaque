@@ -94,7 +94,7 @@ Cette politique de confidentialité peut être mise à jour occasionnellement. T
 
 Pour toute question concernant cette politique de confidentialité, vous pouvez nous contacter à :
 
-📧 [votre-email@exemple.com]
+📧 pixelginformatique@gmail.com
 
 ---
 
