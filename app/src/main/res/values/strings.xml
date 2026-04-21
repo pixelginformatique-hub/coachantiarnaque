@@ -1,4 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Coach Anti-Arnaque</string>
+    <string name="app_subtitle">Votre protection contre les fraudes</string>
+
+    <!-- Home -->
+    <string name="last_message_analyzed">Dernier message analysé</string>
+    <string name="no_message_title">Aucun message analysé</string>
+    <string name="no_message_subtitle">Appuyez ci-dessous pour commencer</string>
+    <string name="btn_analyze_sms">📱  Analyser un SMS</string>
+    <string name="btn_check_website">🌐  Vérifier un site web</string>
+    <string name="btn_analyze_email">📧  Analyser un e-mail</string>
+    <string name="btn_ask_contact">👨‍👩‍👧  Demander à un proche</string>
+    <string name="btn_share_app">💜  Partager l\'application à un proche</string>
+    <string name="btn_history">Historique</string>
+    <string name="btn_listen">Écouter</string>
+    <string name="btn_detail">Voir le détail →</string>
+
+    <!-- Results -->
+    <string name="result_safe">Sécuritaire</string>
+    <string name="result_safe_subtitle">Ce message semble fiable</string>
+    <string name="result_suspicious">Attention</string>
+    <string name="result_suspicious_subtitle">Ce message est douteux</string>
+    <string name="result_scam">Arnaque probable</string>
+    <string name="result_scam_subtitle">Ne cliquez sur aucun lien</string>
+
+    <!-- Analyze SMS -->
+    <string name="analyze_sms_title">Analyser un message</string>
+    <string name="btn_pick_sms">📨  Choisir un SMS reçu</string>
+    <string name="or_paste_text">ou collez le texte</string>
+    <string name="paste_placeholder">Collez le message ici…</string>
+    <string name="btn_analyze_pasted">🔍  Analyser le texte collé</string>
+    <string name="analyzing">Analyse en cours…</string>
+
+    <!-- SMS Picker -->
+    <string name="pick_sms_title">Choisir un SMS</string>
+    <string name="pick_sms_hint">Appuyez sur un message pour l\'analyser</string>
+    <string name="no_sms_found">Aucun SMS trouvé</string>
+    <string name="check_sms_permission">Vérifiez que la permission SMS est accordée</string>
+
+    <!-- Analysis Detail -->
+    <string name="analysis_result_title">Résultat de l\'analyse</string>
+    <string name="message_analyzed">Message analysé</string>
+    <string name="why_this_result">Pourquoi ce résultat</string>
+    <string name="analyzed_on">Analysé le %1$s</string>
+    <string name="btn_send_contact">📤  Envoyer à un proche</string>
+    <string name="btn_delete">🗑️  Supprimer ce message</string>
+
+    <!-- History -->
+    <string name="history_title">Historique</string>
+    <string name="no_history">Aucun message analysé</string>
+
+    <!-- Help -->
+    <string name="help_title">Aide &amp; Proche</string>
+    <string name="trusted_person">👨‍👩‍👧 Votre personne de confiance</string>
+    <string name="help_subtitle">Envoyez le message suspect à un proche pour avoir son avis.</string>
+    <string name="message_preview">📋 Message qui sera envoyé :</string>
+    <string name="contact_name">Nom du proche</string>
+    <string name="contact_phone">Numéro de téléphone</string>
+    <string name="btn_call">📞  Appeler mon proche</string>
+    <string name="btn_sms">💬  Envoyer par SMS</string>
+    <string name="btn_share_other">📤  Partager (WhatsApp, email…)</string>
+    <string name="security_tips_title">💡 Conseils de sécurité</string>
+    <string name="tip_1">Ne cliquez jamais sur un lien dans un SMS inattendu</string>
+    <string name="tip_2">Votre banque ne demandera jamais votre mot de passe par SMS</string>
+    <string name="tip_3">En cas de doute, appelez directement l\'organisme concerné</string>
+    <string name="tip_4">Ne rappelez jamais un numéro inconnu</string>
+
+    <!-- Website Check -->
+    <string name="website_check_title">Vérifier un site</string>
+    <string name="website_check_heading">Vérifier un site ou une boutique</string>
+    <string name="website_check_subtitle">Collez le lien pour vérifier s\'il présente des signes de risque</string>
+    <string name="website_url_placeholder">Collez le lien du site ici</string>
+    <string name="btn_analyze_site">🔍  Analyser le site</string>
+    <string name="checking">Vérification en cours…</string>
+    <string name="analysis_details">Détails de l\'analyse</string>
+    <string name="btn_open_site">Ouvrir</string>
+    <string name="btn_ask_opinion">Demander avis</string>
+    <string name="risk_low">Faible risque</string>
+    <string name="risk_low_msg">Ce site présente peu de signes de risque</string>
+    <string name="risk_moderate">Risque modéré</string>
+    <string name="risk_moderate_msg">Ce site présente certains signes de risque</string>
+    <string name="risk_high">Risque élevé</string>
+    <string name="risk_high_msg">Ce site présente plusieurs signes de risque. Soyez prudent</string>
+
+    <!-- Email Analysis -->
+    <string name="email_analysis_title">Analyser un e-mail</string>
+    <string name="email_analysis_subtitle">Collez le contenu d\'un e-mail suspect pour le vérifier</string>
+    <string name="email_sender_label">Adresse de l\'expéditeur (optionnel)</string>
+    <string name="email_sender_placeholder">ex: service@exemple.com</string>
+    <string name="email_content_placeholder">Collez le contenu de l\'e-mail ici…</string>
+    <string name="btn_analyze_email_action">🔍  Analyser l\'e-mail</string>
+    <string name="email_result_title">Résultat de l\'analyse</string>
+    <string name="email_risk_low_msg">Cet e-mail présente peu de signes de risque</string>
+    <string name="email_risk_moderate_msg">Cet e-mail présente certains signes de risque</string>
+    <string name="email_risk_high_msg">Cet e-mail présente plusieurs signes de risque. Soyez prudent</string>
+    <string name="btn_send">Envoyer</string>
+
+    <!-- Disclaimer -->
+    <string name="disclaimer_title">Avertissement important</string>
+    <string name="disclaimer_p1">Cette application fournit des indications à titre informatif uniquement, basées sur les informations publiques disponibles au moment de l\'analyse.</string>
+    <string name="disclaimer_p2">Les résultats ne constituent en aucun cas une garantie de sécurité. Un message, un e-mail ou un site web jugé « sécuritaire » par l\'application pourrait néanmoins s\'avérer frauduleux.</string>
+    <string name="disclaimer_p3">Les créateurs de cette application ne peuvent être tenus responsables en cas de fraude non détectée ou de toute perte résultant de l\'utilisation de cette application.</string>
+    <string name="disclaimer_p4">En cas de doute, contactez toujours directement l\'organisme concerné ou demandez l\'avis d\'un proche.</string>
+    <string name="btn_accept">✅  J\'ai compris et j\'accepte</string>
+
+    <!-- Errors -->
+    <string name="error_analysis">Erreur lors de l\'analyse. Veuillez réessayer.</string>
+    <string name="error_network">Impossible de vérifier pour le moment. Vérifiez votre connexion.</string>
+    <string name="error_invalid_url">Le lien semble incorrect. Vérifiez l\'adresse et réessayez.</string>
+    <string name="error_empty_email">Veuillez entrer le contenu de l\'e-mail</string>
+    <string name="error_invalid_email">L\'adresse e-mail semble incorrecte</string>
+
+    <!-- Detection reasons (SMS) -->
+    <string name="reason_suspicious_words">Ce message contient des mots suspects : %1$s</string>
+    <string name="reason_link_detected">Ce message contient un lien — soyez prudent avant de cliquer</string>
+    <string name="reason_shortener">Ce message utilise un lien raccourci qui cache la vraie adresse</string>
+    <string name="reason_unknown_number">Ce message vient d\'un numéro qui n\'est pas dans vos contacts, mais le numéro ne semble pas suspect</string>
+    <string name="reason_urgency">Ce message crée un sentiment d\'urgence pour vous pousser à agir vite</string>
+    <string name="reason_personal_info">Ce message demande des informations personnelles ou bancaires</string>
+    <string name="reason_malicious_url">Le lien dans ce message a été identifié comme dangereux</string>
+    <string name="reason_fraud_number">Ce numéro est répertorié comme frauduleux</string>
+    <string name="reason_bad_reputation">Le lien a une mauvaise réputation sur internet</string>
+    <string name="reason_none">Aucun élément suspect détecté dans ce message</string>
+
+    <!-- Detection reasons (Website) -->
+    <string name="reason_suspicious_tld">L\'extension du site (%1$s) est inhabituelle</string>
+    <string name="reason_brand_in_domain">Le nom du site utilise une marque connue (%1$s) de façon inhabituelle</string>
+    <string name="reason_suspicious_domain_words">Le nom du site contient des mots souvent associés à des sites à risque</string>
+    <string name="reason_long_domain">Le nom du site est inhabituellement long</string>
+    <string name="reason_many_dashes">Le nom du site contient plusieurs tirets, ce qui est inhabituel</string>
+    <string name="reason_many_subdomains">Le site utilise plusieurs sous-domaines, ce qui peut être suspect</string>
+    <string name="reason_safe_browsing_hit">Ce lien est signalé comme potentiellement dangereux par les bases de sécurité</string>
+    <string name="reason_vt_high">Plusieurs services de sécurité signalent ce site comme à risque</string>
+    <string name="reason_vt_low">Certains services de sécurité ont émis des alertes sur ce site</string>
+    <string name="reason_domain_very_new">Le site est très récent (moins d\'une semaine)</string>
+    <string name="reason_domain_new">Le site est récent (moins d\'un mois)</string>
+    <string name="reason_domain_recent">Le site a été créé il y a moins de 3 mois</string>
+    <string name="reason_website_none">Aucun signe de risque particulier détecté pour ce site</string>
+
+    <!-- Detection reasons (Email) -->
+    <string name="reason_email_suspicious_words">Ce message contient des expressions souvent utilisées dans les e-mails à risque</string>
+    <string name="reason_email_links">Cet e-mail contient %1$d lien(s) — vérifiez avant de cliquer</string>
+    <string name="reason_email_shortener">Un lien utilise un raccourcisseur qui cache la vraie adresse</string>
+    <string name="reason_email_urgency">Ce message crée un sentiment d\'urgence pour vous pousser à agir vite</string>
+    <string name="reason_email_personal_info">Ce message demande des informations personnelles ou bancaires</string>
+    <string name="reason_email_typosquat">L\'adresse de l\'expéditeur ressemble à une imitation (%1$s)</string>
+    <string name="reason_email_free_domain">L\'e-mail provient d\'une adresse gratuite mais mentionne \"%1$s\" — les vrais organismes utilisent leur propre domaine</string>
+    <string name="reason_email_suspicious_tld">L\'adresse de l\'expéditeur utilise une extension inhabituelle (%1$s)</string>
+    <string name="reason_email_long_domain">Le domaine de l\'expéditeur est inhabituellement long</string>
+    <string name="reason_email_many_digits">L\'adresse de l\'expéditeur contient beaucoup de chiffres</string>
+    <string name="reason_email_none">Aucun signe de risque particulier détecté dans cet e-mail</string>
+
+    <!-- Share messages -->
+    <string name="share_intro">Bonjour,\n\nJ\'utilise l\'application Coach Anti-Arnaque pour vérifier les messages suspects. J\'aimerais avoir ton avis sur celui-ci.\n</string>
+    <string name="share_outro">\nQu\'en penses-tu ?\n\nMerci 🙏</string>
+    <string name="share_sms_header">📱 Analyse d\'un SMS</string>
+    <string name="share_email_header">📧 Analyse d\'un e-mail</string>
+    <string name="share_website_header">🌐 Vérification d\'un site web</string>
+    <string name="share_sender">Expéditeur : %1$s</string>
+    <string name="share_result">Résultat : %1$s</string>
+    <string name="share_message_received">Message reçu :</string>
+    <string name="share_email_content">Contenu de l\'e-mail :</string>
+    <string name="share_site_checked">Site vérifié : %1$s</string>
+    <string name="share_reasons">Raisons détectées :</string>
+    <string name="share_details">Détails :</string>
+    <string name="share_app_message">Bonjour,\n\nJ\'utilise cette application pour vérifier si des messages ou des sites sont sécuritaires. Elle est très simple à utiliser et peut aider à éviter les arnaques.\n\nTu peux l\'essayer ici :\nhttps://play.google.com/store/apps/details?id=com.coachantiarnaque\n\nC\'est gratuit et ça prend 2 minutes à installer.</string>
+    <string name="share_help_suspect">📱 Message suspect reçu</string>
+    <string name="share_help_generic">J\'ai reçu un message suspect et j\'aimerais ton avis.</string>
+    <string name="share_help_result">Résultat de l\'analyse : %1$s</string>
+    <string name="share_via">Envoyer à…</string>
+    <string name="share_app_via">Partager l\'application via…</string>
+    <string name="share_app_subject">Coach Anti-Arnaque — Application recommandée</string>
+
+    <!-- TTS -->
+    <string name="tts_safe">Ce message est sécuritaire.</string>
+    <string name="tts_suspicious">Attention, ce message est douteux.</string>
+    <string name="tts_scam">Attention, ce message est probablement une arnaque.</string>
+    <string name="tts_email_low">Cet e-mail présente peu de signes de risque.</string>
+    <string name="tts_email_moderate">Attention, cet e-mail présente certains signes de risque.</string>
+    <string name="tts_email_high">Attention, cet e-mail présente plusieurs signes de risque. Soyez prudent.</string>
 </resources>

@@ -8,6 +8,7 @@ import com.coachantiarnaque.data.api.*
 import com.coachantiarnaque.domain.engine.WebsiteAnalysisEngine
 import com.coachantiarnaque.domain.engine.WebsiteAnalysisResult
 import com.coachantiarnaque.domain.engine.WebsiteApiResults
+import com.coachantiarnaque.utils.StringProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit
 class WebsiteCheckViewModel(application: Application) : AndroidViewModel(application) {
 
     private val engine = WebsiteAnalysisEngine()
+    private val sp = StringProvider(application)
 
     private val _result = MutableStateFlow<WebsiteAnalysisResult?>(null)
     val result: StateFlow<WebsiteAnalysisResult?> = _result.asStateFlow()
@@ -59,12 +61,12 @@ class WebsiteCheckViewModel(application: Application) : AndroidViewModel(applica
                 val apiResults = withContext(Dispatchers.IO) {
                     fetchApiResults(url)
                 }
-                val analysisResult = engine.analyze(url, apiResults)
+                val analysisResult = engine.analyze(url, apiResults, sp)
                 _result.value = analysisResult
             } catch (e: Exception) {
                 // En cas d'erreur réseau, analyser quand même avec les règles locales
                 try {
-                    val localResult = engine.analyze(url)
+                    val localResult = engine.analyze(url, sp = sp)
                     _result.value = localResult
                 } catch (_: Exception) {
                     _error.value = "Impossible de vérifier pour le moment. Vérifiez votre connexion."

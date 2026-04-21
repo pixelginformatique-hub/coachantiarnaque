@@ -9,6 +9,7 @@ import com.coachantiarnaque.data.local.AnalyzedMessageEntity
 import com.coachantiarnaque.domain.engine.ApiCheckResults
 import com.coachantiarnaque.domain.engine.ScamDetectionEngine
 import com.coachantiarnaque.domain.model.AnalysisResult
+import com.coachantiarnaque.utils.StringProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -22,6 +23,7 @@ class MessageRepository(
     private val context: Context
 ) {
     private val engine = ScamDetectionEngine()
+    private val sp = StringProvider(context)
 
     /**
      * Analyse un message complet : règles locales + APIs externes.
@@ -48,7 +50,8 @@ class MessageRepository(
             content = content,
             senderNumber = senderNumber,
             knownContacts = knownContacts,
-            apiResults = apiResults
+            apiResults = apiResults,
+            sp = sp
         )
 
         // Sauvegarder en base

@@ -1,113 +1,70 @@
 package com.coachantiarnaque.utils
 
+import android.content.Context
+import com.coachantiarnaque.R
+
 /**
- * Utilitaire centralisé pour construire les messages de partage à un proche.
- * Format standardisé pour toutes les analyses (SMS, email, site web).
+ * Utilitaire centralisé pour construire les messages de partage.
+ * Utilise les ressources string pour le support multilingue.
  */
 object ShareMessageBuilder {
 
-    private const val INTRO = "Bonjour,\n\nJ'utilise l'application Coach Anti-Arnaque pour vérifier les messages suspects. J'aimerais avoir ton avis sur celui-ci.\n"
-    private const val OUTRO = "\nQu'en penses-tu ?\n\nMerci 🙏"
-
-    /**
-     * Message de partage pour une analyse SMS.
-     */
-    fun forSms(
-        content: String,
-        senderNumber: String?,
-        resultLabel: String,
-        reasons: List<String>
-    ): String = buildString {
-        appendLine(INTRO)
-        appendLine("📱 Analyse d'un SMS")
+    fun forSms(ctx: Context, content: String, senderNumber: String?, resultLabel: String, reasons: List<String>): String = buildString {
+        appendLine(ctx.getString(R.string.share_intro))
+        appendLine(ctx.getString(R.string.share_sms_header))
         appendLine("━━━━━━━━━━━━━━━━━━")
-        if (!senderNumber.isNullOrBlank()) {
-            appendLine("Expéditeur : $senderNumber")
-        }
-        appendLine("Résultat : $resultLabel")
+        if (!senderNumber.isNullOrBlank()) appendLine(ctx.getString(R.string.share_sender, senderNumber))
+        appendLine(ctx.getString(R.string.share_result, resultLabel))
         appendLine()
-        appendLine("Message reçu :")
+        appendLine(ctx.getString(R.string.share_message_received))
         appendLine("« $content »")
         appendLine()
-        appendLine("Raisons détectées :")
+        appendLine(ctx.getString(R.string.share_reasons))
         reasons.forEach { appendLine("• $it") }
-        append(OUTRO)
+        append(ctx.getString(R.string.share_outro))
     }
 
-    /**
-     * Message de partage pour une analyse email.
-     */
-    fun forEmail(
-        content: String,
-        senderEmail: String?,
-        resultLabel: String,
-        reasons: List<String>
-    ): String = buildString {
-        appendLine(INTRO)
-        appendLine("📧 Analyse d'un e-mail")
+    fun forEmail(ctx: Context, content: String, senderEmail: String?, resultLabel: String, reasons: List<String>): String = buildString {
+        appendLine(ctx.getString(R.string.share_intro))
+        appendLine(ctx.getString(R.string.share_email_header))
         appendLine("━━━━━━━━━━━━━━━━━━━━")
-        if (!senderEmail.isNullOrBlank()) {
-            appendLine("Expéditeur : $senderEmail")
-        }
-        appendLine("Résultat : $resultLabel")
+        if (!senderEmail.isNullOrBlank()) appendLine(ctx.getString(R.string.share_sender, senderEmail))
+        appendLine(ctx.getString(R.string.share_result, resultLabel))
         appendLine()
-        appendLine("Contenu de l'e-mail :")
+        appendLine(ctx.getString(R.string.share_email_content))
         appendLine("« ${content.take(500)} »")
         appendLine()
-        appendLine("Raisons détectées :")
+        appendLine(ctx.getString(R.string.share_reasons))
         reasons.forEach { appendLine("• $it") }
-        append(OUTRO)
+        append(ctx.getString(R.string.share_outro))
     }
 
-    /**
-     * Message de partage pour une vérification de site web.
-     */
-    fun forWebsite(
-        url: String,
-        resultLabel: String,
-        reasons: List<String>
-    ): String = buildString {
-        appendLine(INTRO)
-        appendLine("🌐 Vérification d'un site web")
+    fun forWebsite(ctx: Context, url: String, resultLabel: String, reasons: List<String>): String = buildString {
+        appendLine(ctx.getString(R.string.share_intro))
+        appendLine(ctx.getString(R.string.share_website_header))
         appendLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-        appendLine("Site vérifié : $url")
-        appendLine("Résultat : $resultLabel")
+        appendLine(ctx.getString(R.string.share_site_checked, url))
+        appendLine(ctx.getString(R.string.share_result, resultLabel))
         appendLine()
-        appendLine("Détails :")
+        appendLine(ctx.getString(R.string.share_details))
         reasons.forEach { appendLine("• $it") }
-        append(OUTRO)
+        append(ctx.getString(R.string.share_outro))
     }
 
-    /**
-     * Message générique pour demander à un proche (écran Aide).
-     */
-    fun forHelpScreen(
-        content: String?,
-        senderNumber: String?,
-        resultLabel: String?,
-        reasons: List<String>?
-    ): String = buildString {
-        appendLine(INTRO)
+    fun forHelpScreen(ctx: Context, content: String?, senderNumber: String?, resultLabel: String?, reasons: List<String>?): String = buildString {
+        appendLine(ctx.getString(R.string.share_intro))
         if (content != null) {
-            appendLine("📱 Message suspect reçu")
+            appendLine(ctx.getString(R.string.share_help_suspect))
             appendLine("━━━━━━━━━━━━━━━━━━━━━")
-            if (!senderNumber.isNullOrBlank()) {
-                appendLine("Expéditeur : $senderNumber")
-            }
-            if (resultLabel != null) {
-                appendLine("Résultat de l'analyse : $resultLabel")
-            }
+            if (!senderNumber.isNullOrBlank()) appendLine(ctx.getString(R.string.share_sender, senderNumber))
+            if (resultLabel != null) appendLine(ctx.getString(R.string.share_help_result, resultLabel))
             appendLine()
-            appendLine("Message :")
+            appendLine(ctx.getString(R.string.share_message_received))
             appendLine("« $content »")
-            if (!reasons.isNullOrEmpty()) {
-                appendLine()
-                appendLine("Raisons détectées :")
-                reasons.forEach { appendLine("• $it") }
-            }
+            if (!reasons.isNullOrEmpty()) { appendLine(); appendLine(ctx.getString(R.string.share_reasons)); reasons.forEach { appendLine("• $it") } }
         } else {
-            appendLine("J'ai reçu un message suspect et j'aimerais ton avis.")
+            appendLine(ctx.getString(R.string.share_help_generic))
         }
-        append(OUTRO)
+        append(ctx.getString(R.string.share_outro))
     }
 }

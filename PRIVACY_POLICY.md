@@ -1,4 +1,6 @@
-# Politique de confidentialité — Coach Anti-Arnaque
+# Politique de confidentialité / Privacy Policy
+
+# 🇫🇷 Français
 
 **Date d'entrée en vigueur : 17 avril 2026**
 
@@ -29,73 +31,123 @@ Pour améliorer la précision des analyses, certaines données peuvent être tra
 
 ## Données NON collectées
 
-L'Application **ne collecte pas** :
-
-- Votre nom, adresse e-mail ou numéro de téléphone
-- Votre localisation géographique
-- Des identifiants publicitaires
-- Des données d'utilisation ou d'analyse (analytics)
-- Des données à des fins publicitaires
+L'Application **ne collecte pas** : votre nom, adresse e-mail ou numéro de téléphone, votre localisation géographique, des identifiants publicitaires, des données d'utilisation ou d'analyse, des données à des fins publicitaires.
 
 ## Stockage des données
 
-Toutes les données d'analyse (historique des messages analysés) sont stockées **exclusivement sur votre appareil** dans une base de données locale. Aucune donnée n'est stockée sur des serveurs distants.
-
-Vous pouvez supprimer l'historique des analyses à tout moment depuis l'Application, ou en désinstallant l'Application.
+Toutes les données d'analyse sont stockées **exclusivement sur votre appareil** dans une base de données locale. Aucune donnée n'est stockée sur des serveurs distants. Vous pouvez supprimer l'historique à tout moment depuis l'Application ou en la désinstallant.
 
 ## Partage des données
 
-L'Application ne partage aucune donnée personnelle avec des tiers à des fins commerciales, publicitaires ou de profilage.
-
-Les seuls partages de données sont :
-
-- **À votre initiative** : lorsque vous utilisez la fonction « Envoyer à un proche » ou « Partager », le contenu est partagé via les applications de votre choix (SMS, WhatsApp, e-mail, etc.).
-- **Services de sécurité** : comme décrit ci-dessus, les URLs peuvent être vérifiées auprès de services de sécurité tiers.
+L'Application ne partage aucune donnée personnelle avec des tiers à des fins commerciales, publicitaires ou de profilage. Les seuls partages sont à votre initiative (fonction « Envoyer à un proche ») et les vérifications de sécurité décrites ci-dessus.
 
 ## Permissions requises
 
-L'Application demande les permissions suivantes :
-
 | Permission | Utilisation |
 |---|---|
-| READ_SMS | Lire vos SMS pour vous permettre de sélectionner un message à analyser |
+| READ_SMS | Lire vos SMS pour analyse |
 | RECEIVE_SMS | Analyser automatiquement les SMS entrants |
-| READ_CONTACTS | Vérifier si l'expéditeur d'un message est dans vos contacts |
-| INTERNET | Communiquer avec les services de vérification de sécurité |
-| VIBRATE | Alerter par vibration en cas de message à risque élevé |
+| READ_CONTACTS | Vérifier si l'expéditeur est dans vos contacts |
+| INTERNET | Communiquer avec les services de vérification |
+| VIBRATE | Alerter par vibration en cas de risque élevé |
 
-Toutes les permissions sont optionnelles. L'Application fonctionne avec des fonctionnalités réduites si certaines permissions ne sont pas accordées.
+Toutes les permissions sont optionnelles.
 
 ## Sécurité
 
-Les données stockées localement sont protégées par les mécanismes de sécurité du système d'exploitation Android. L'Application ne transmet aucune donnée personnelle sur Internet.
+Les données stockées localement sont protégées par les mécanismes de sécurité du système Android.
 
 ## Droits des utilisateurs
 
-Vous avez le droit de :
-
-- **Accéder** à vos données : toutes les données sont visibles dans l'historique de l'Application.
-- **Supprimer** vos données : vous pouvez supprimer individuellement chaque analyse depuis l'historique, ou supprimer toutes les données en désinstallant l'Application.
-- **Refuser les permissions** : vous pouvez refuser ou révoquer les permissions à tout moment dans les paramètres de votre appareil.
+Vous pouvez accéder à vos données dans l'historique, les supprimer individuellement ou en désinstallant l'Application, et révoquer les permissions à tout moment.
 
 ## Enfants
 
-L'Application n'est pas destinée aux enfants de moins de 13 ans et ne collecte pas sciemment de données auprès d'enfants.
+L'Application n'est pas destinée aux enfants de moins de 13 ans.
 
 ## Limitation de responsabilité
 
-L'Application fournit des indications à titre informatif uniquement, basées sur les informations publiques disponibles au moment de l'analyse. Les résultats ne constituent en aucun cas une garantie de sécurité. Les créateurs de l'Application ne peuvent être tenus responsables en cas de fraude non détectée ou de toute perte résultant de l'utilisation de l'Application.
-
-## Modifications
-
-Cette politique de confidentialité peut être mise à jour occasionnellement. Toute modification sera publiée sur cette page avec une date d'entrée en vigueur mise à jour.
+L'Application fournit des indications à titre informatif uniquement. Les résultats ne constituent pas une garantie de sécurité. Les créateurs ne peuvent être tenus responsables en cas de fraude non détectée.
 
 ## Contact
-
-Pour toute question concernant cette politique de confidentialité, vous pouvez nous contacter à :
 
 📧 pixelginformatique@gmail.com
 
 ---
 
-*Dernière mise à jour : 17 avril 2026*
+# 🇬🇧 English
+
+**Effective date: April 17, 2026**
+
+## Introduction
+
+Anti-Scam Coach ("the App") is a free mobile application designed to help users identify potentially fraudulent messages, emails, and websites. Protecting your privacy is important to us. This privacy policy explains what data is collected, how it is used, and what your rights are.
+
+## Data Collected
+
+### Data processed locally on your device
+
+The App processes the following data **only on your device** (local storage):
+
+- **Text messages (SMS)**: when you choose to analyze a text message, the message content and sender number are read and analyzed locally. This data is stored in a local database on your device only (analysis history).
+- **Email content**: when you paste or share email content for analysis, it is processed locally on your device.
+- **Website URLs**: when you submit a link for verification, it is analyzed locally.
+- **Contacts**: the App may access your contact list only to determine if a message sender is a known contact. No contact data is stored, transmitted, or shared.
+
+### Data transmitted to third-party services
+
+To improve analysis accuracy, certain data may be transmitted to third-party security services:
+
+- **Google Safe Browsing API**: URLs may be sent to Google Safe Browsing to check if they are listed as malicious. [Google Privacy Policy](https://policies.google.com/privacy)
+- **VirusTotal API**: URLs may be sent to VirusTotal to obtain a reputation score. [VirusTotal Privacy Policy](https://docs.virustotal.com/docs/privacy-policy)
+- **WhoisXML API**: domain names may be sent to WhoisXML to check domain registration age. [WhoisXML Privacy Policy](https://whoisxmlapi.com/privacy-policy)
+
+**Important**: only URLs and domain names are transmitted to these services. Message content, your personal information, and your contacts are never transmitted.
+
+## Data NOT collected
+
+The App **does not collect**: your name, email address, or phone number, your geographic location, advertising identifiers, usage or analytics data, data for advertising purposes.
+
+## Data Storage
+
+All analysis data is stored **exclusively on your device** in a local database. No data is stored on remote servers. You can delete the history at any time from within the App or by uninstalling it.
+
+## Data Sharing
+
+The App does not share any personal data with third parties for commercial, advertising, or profiling purposes. The only sharing occurs at your initiative ("Send to someone you trust" feature) and the security checks described above.
+
+## Permissions Required
+
+| Permission | Usage |
+|---|---|
+| READ_SMS | Read your text messages for analysis |
+| RECEIVE_SMS | Automatically analyze incoming text messages |
+| READ_CONTACTS | Check if a message sender is in your contacts |
+| INTERNET | Communicate with security verification services |
+| VIBRATE | Alert by vibration in case of high-risk message |
+
+All permissions are optional.
+
+## Security
+
+Locally stored data is protected by the Android operating system's security mechanisms.
+
+## User Rights
+
+You can access your data in the history, delete it individually or by uninstalling the App, and revoke permissions at any time.
+
+## Children
+
+The App is not intended for children under 13 years of age.
+
+## Limitation of Liability
+
+The App provides information for guidance purposes only. Results do not constitute a guarantee of safety. The creators cannot be held responsible for undetected fraud.
+
+## Contact
+
+📧 pixelginformatique@gmail.com
+
+---
+
+*Last updated / Dernière mise à jour : April 17, 2026*

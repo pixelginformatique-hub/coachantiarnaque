@@ -1,233 +1,90 @@
 package com.coachantiarnaque.domain.engine
 
-/**
- * Niveau de risque d'un email.
- * Wording légal : "signes de risque", jamais "arnaque".
- */
-enum class EmailRiskLevel {
-    LOW,      // 🟢 Faible risque
-    MODERATE, // 🟠 Risque modéré
-    HIGH      // 🔴 Risque élevé
-}
+import com.coachantiarnaque.R
+import com.coachantiarnaque.utils.StringProvider
 
-/**
- * Résultat de l'analyse d'un email.
- */
-data class EmailAnalysisResult(
-    val score: Int,
-    val riskLevel: EmailRiskLevel,
-    val reasons: List<String>
-) {
+enum class EmailRiskLevel { LOW, MODERATE, HIGH }
+
+data class EmailAnalysisResult(val score: Int, val riskLevel: EmailRiskLevel, val reasons: List<String>) {
     companion object {
         fun fromScore(score: Int, reasons: List<String>): EmailAnalysisResult {
-            val level = when {
-                score >= 6 -> EmailRiskLevel.HIGH
-                score >= 3 -> EmailRiskLevel.MODERATE
-                else -> EmailRiskLevel.LOW
-            }
+            val level = when { score >= 6 -> EmailRiskLevel.HIGH; score >= 3 -> EmailRiskLevel.MODERATE; else -> EmailRiskLevel.LOW }
             return EmailAnalysisResult(score, level, reasons)
         }
     }
 }
 
-/**
- * Moteur d'analyse d'emails basé sur des règles (sans IA).
- * Analyse le contenu et l'adresse de l'expéditeur.
- */
 class EmailAnalysisEngine {
-
     companion object {
-        // Mots-clés suspects (réutilisés du moteur SMS + spécifiques email)
         val SUSPICIOUS_KEYWORDS = listOf(
-            "urgence", "immédiatement", "compte bloqué", "cliquez ici",
-            "paiement", "banque", "vérifiez votre compte",
-            "mot de passe", "confirmer", "suspendre", "expiration",
-            "remboursement", "carte bancaire", "coordonnées bancaires",
-            "gagné", "félicitations", "dernière chance",
-            "action requise", "dans les 24h", "dans les 48h",
-            "votre compte sera", "désactivé", "fermé",
-            "mettre à jour vos informations", "connexion inhabituelle",
-            "activité suspecte", "sécuriser votre compte",
-            "facture", "impayé", "relance", "huissier",
-            "héritage", "loterie", "million", "bénéficiaire"
+            "urgence","immédiatement","compte bloqué","cliquez ici","paiement","banque","vérifiez votre compte",
+            "mot de passe","confirmer","suspendre","expiration","remboursement","carte bancaire","coordonnées bancaires",
+            "gagné","félicitations","dernière chance","action requise","dans les 24h","dans les 48h",
+            "votre compte sera","désactivé","fermé","mettre à jour vos informations","connexion inhabituelle",
+            "activité suspecte","sécuriser votre compte","facture","impayé","relance","huissier",
+            "héritage","loterie","million","bénéficiaire",
+            "urgent","immediately","account blocked","click here","payment","bank","verify your account",
+            "password","confirm","suspended","expiring","refund","credit card","bank details",
+            "won","congratulations","last chance","action required","within 24h","within 48h",
+            "your account will be","deactivated","closed","update your information","unusual login",
+            "suspicious activity","secure your account","invoice","unpaid","reminder","bailiff",
+            "inheritance","lottery","beneficiary"
         )
-
-        val URL_REGEX = Regex(
-            """(https?://[^\s]+)|(www\.[^\s]+)""",
-            RegexOption.IGNORE_CASE
-        )
-
-        val URL_SHORTENERS = listOf(
-            "bit.ly", "tinyurl", "t.co", "goo.gl", "ow.ly",
-            "is.gd", "buff.ly", "adf.ly", "tiny.cc", "rb.gy",
-            "cutt.ly", "shorturl.at"
-        )
-
-        // Domaines gratuits
-        val FREE_EMAIL_DOMAINS = listOf(
-            "gmail.com", "yahoo.com", "yahoo.fr", "outlook.com",
-            "hotmail.com", "hotmail.fr", "live.com", "aol.com",
-            "protonmail.com", "mail.com", "yandex.com", "gmx.com"
-        )
-
-        // Marques souvent usurpées
-        val IMPERSONATED_BRANDS = listOf(
-            "banque", "paypal", "amazon", "apple", "microsoft",
-            "netflix", "google", "facebook", "instagram", "desjardins",
-            "rbc", "td", "bmo", "poste", "chronopost", "colissimo",
-            "impot", "gouv", "caf", "cpam", "ameli", "edf"
-        )
-
-        // Typosquatting connu
-        val TYPOSQUAT_PATTERNS = listOf(
-            "amaz0n", "paypa1", "g00gle", "faceb00k", "micros0ft",
-            "app1e", "netf1ix", "go0gle", "amazom", "paypai",
-            "arnazon", "arnazon", "rnicrosoft", "gooogle", "yahooo",
-            "banqu3", "desjard1ns"
-        )
-
-        // TLDs suspects
-        val SUSPICIOUS_TLDS = listOf(
-            ".xyz", ".top", ".club", ".work", ".buzz", ".icu",
-            ".site", ".online", ".fun", ".space", ".click",
-            ".link", ".tk", ".ml", ".ga", ".cf", ".gq"
-        )
-
-        val EMAIL_REGEX = Regex(
-            """^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"""
-        )
+        val URL_REGEX = Regex("""(https?://[^\s]+)|(www\.[^\s]+)""", RegexOption.IGNORE_CASE)
+        val URL_SHORTENERS = listOf("bit.ly","tinyurl","t.co","goo.gl","ow.ly","is.gd","buff.ly","adf.ly","tiny.cc","rb.gy","cutt.ly","shorturl.at")
+        val FREE_EMAIL_DOMAINS = listOf("gmail.com","yahoo.com","yahoo.fr","outlook.com","hotmail.com","hotmail.fr","live.com","aol.com","protonmail.com","mail.com","yandex.com","gmx.com")
+        val IMPERSONATED_BRANDS = listOf("banque","paypal","amazon","apple","microsoft","netflix","google","facebook","instagram","desjardins","rbc","td","bmo","poste","chronopost","colissimo","impot","gouv","caf","cpam","ameli","edf","bank","irs","usps","fedex","ups","walmart","costco","target","wells fargo","chase","citibank")
+        val TYPOSQUAT_PATTERNS = listOf("amaz0n","paypa1","g00gle","faceb00k","micros0ft","app1e","netf1ix","go0gle","amazom","paypai","arnazon","rnicrosoft","gooogle","yahooo","banqu3","desjard1ns")
+        val SUSPICIOUS_TLDS = listOf(".xyz",".top",".club",".work",".buzz",".icu",".site",".online",".fun",".space",".click",".link",".tk",".ml",".ga",".cf",".gq")
+        val EMAIL_REGEX = Regex("""^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$""")
     }
 
-    /**
-     * Analyse complète d'un email : contenu + expéditeur.
-     */
-    fun analyze(
-        content: String,
-        senderEmail: String? = null
-    ): EmailAnalysisResult {
-        var score = 0
-        val reasons = mutableListOf<String>()
-        val lowerContent = content.lowercase()
+    fun analyze(content: String, senderEmail: String? = null, sp: StringProvider? = null): EmailAnalysisResult {
+        var score = 0; val reasons = mutableListOf<String>(); val lc = content.lowercase()
 
-        // === ANALYSE DU CONTENU ===
+        val found = SUSPICIOUS_KEYWORDS.filter { lc.contains(it) }
+        if (found.isNotEmpty()) { score += found.size.coerceAtMost(3); reasons.add(sp?.getString(R.string.reason_email_suspicious_words) ?: "Ce message contient des expressions souvent utilisées dans les e-mails à risque") }
 
-        // 1. Mots-clés suspects
-        val foundKeywords = SUSPICIOUS_KEYWORDS.filter { lowerContent.contains(it) }
-        if (foundKeywords.isNotEmpty()) {
-            score += foundKeywords.size.coerceAtMost(3) // max +3
-            reasons.add("Ce message contient des expressions souvent utilisées dans les emails à risque")
-        }
-
-        // 2. Détection de liens
         val urls = URL_REGEX.findAll(content).map { it.value }.toList()
         if (urls.isNotEmpty()) {
-            score += 2
-            reasons.add("Cet email contient ${urls.size} lien(s) — vérifiez avant de cliquer")
-
-            // 3. Raccourcisseurs d'URL
-            val shorteners = urls.filter { url ->
-                URL_SHORTENERS.any { s -> url.lowercase().contains(s) }
-            }
-            if (shorteners.isNotEmpty()) {
-                score += 3
-                reasons.add("Un lien utilise un raccourcisseur qui cache la vraie adresse")
-            }
+            score += 2; reasons.add(sp?.getString(R.string.reason_email_links, urls.size) ?: "Cet e-mail contient ${urls.size} lien(s) — vérifiez avant de cliquer")
+            if (urls.any { url -> URL_SHORTENERS.any { s -> url.lowercase().contains(s) } }) { score += 3; reasons.add(sp?.getString(R.string.reason_email_shortener) ?: "Un lien utilise un raccourcisseur qui cache la vraie adresse") }
         }
 
-        // 4. Sentiment d'urgence
-        val urgencyPatterns = listOf(
-            "immédiatement", "urgent", "dans les 24h", "dans les 48h",
-            "dernière chance", "action requise", "sans délai",
-            "votre compte sera fermé", "votre compte sera désactivé"
-        )
-        if (urgencyPatterns.any { lowerContent.contains(it) }) {
-            score += 1
-            reasons.add("Ce message crée un sentiment d'urgence pour vous pousser à agir vite")
-        }
+        val urgency = listOf("immédiatement","urgent","dans les 24h","dans les 48h","dernière chance","action requise","sans délai","votre compte sera fermé","votre compte sera désactivé","immediately","within 24 hours","within 48 hours","last chance","action required","act now","your account will be closed")
+        if (urgency.any { lc.contains(it) }) { score += 1; reasons.add(sp?.getString(R.string.reason_email_urgency) ?: "Ce message crée un sentiment d'urgence pour vous pousser à agir vite") }
 
-        // 5. Demande d'informations personnelles
-        val personalInfoPatterns = listOf(
-            "mot de passe", "numéro de carte", "code secret",
-            "identifiant", "coordonnées bancaires", "rib", "iban",
-            "numéro de sécurité sociale", "date de naissance"
-        )
-        if (personalInfoPatterns.any { lowerContent.contains(it) }) {
-            score += 2
-            reasons.add("Ce message demande des informations personnelles ou bancaires")
-        }
+        val personal = listOf("mot de passe","numéro de carte","code secret","identifiant","coordonnées bancaires","rib","iban","numéro de sécurité sociale","date de naissance","password","card number","secret code","login","bank details","social security number")
+        if (personal.any { lc.contains(it) }) { score += 2; reasons.add(sp?.getString(R.string.reason_email_personal_info) ?: "Ce message demande des informations personnelles ou bancaires") }
 
-        // === ANALYSE DE L'EXPÉDITEUR ===
         if (!senderEmail.isNullOrBlank()) {
-            val senderReasons = analyzeSender(senderEmail, lowerContent)
-            score += senderReasons.first
-            reasons.addAll(senderReasons.second)
+            val sr = analyzeSender(senderEmail, lc, sp); score += sr.first; reasons.addAll(sr.second)
         }
 
-        // Si aucune raison
-        if (reasons.isEmpty()) {
-            reasons.add("Aucun signe de risque particulier détecté dans cet email")
-        }
-
+        if (reasons.isEmpty()) { reasons.add(sp?.getString(R.string.reason_email_none) ?: "Aucun signe de risque particulier détecté dans cet e-mail") }
         return EmailAnalysisResult.fromScore(score, reasons)
     }
 
-    /**
-     * Analyse l'adresse email de l'expéditeur.
-     * @return Pair(score, raisons)
-     */
-    private fun analyzeSender(email: String, contentLower: String): Pair<Int, List<String>> {
-        var score = 0
-        val reasons = mutableListOf<String>()
-        val lowerEmail = email.lowercase().trim()
-
-        // Extraire le domaine
-        val domain = lowerEmail.substringAfter("@", "")
+    private fun analyzeSender(email: String, contentLower: String, sp: StringProvider?): Pair<Int, List<String>> {
+        var score = 0; val reasons = mutableListOf<String>(); val domain = email.lowercase().trim().substringAfter("@", "")
         if (domain.isEmpty()) return Pair(0, emptyList())
 
-        // 1. Typosquatting
         val typo = TYPOSQUAT_PATTERNS.firstOrNull { domain.contains(it) }
-        if (typo != null) {
-            score += 2
-            reasons.add("L'adresse de l'expéditeur ressemble à une imitation ($typo)")
+        if (typo != null) { score += 2; reasons.add(sp?.getString(R.string.reason_email_typosquat, typo) ?: "L'adresse de l'expéditeur ressemble à une imitation ($typo)") }
+
+        val isFree = FREE_EMAIL_DOMAINS.any { domain == it }
+        if (isFree) {
+            val brand = IMPERSONATED_BRANDS.firstOrNull { contentLower.contains(it) }
+            if (brand != null) { score += 2; reasons.add(sp?.getString(R.string.reason_email_free_domain, brand) ?: "L'e-mail provient d'une adresse gratuite mais mentionne \"$brand\"") }
         }
 
-        // 2. Domaine gratuit + contenu mentionne une marque/institution
-        val isFreeEmail = FREE_EMAIL_DOMAINS.any { domain == it }
-        if (isFreeEmail) {
-            val brandMentioned = IMPERSONATED_BRANDS.firstOrNull { contentLower.contains(it) }
-            if (brandMentioned != null) {
-                score += 2
-                reasons.add("L'email provient d'une adresse gratuite mais mentionne \"$brandMentioned\" — les vrais organismes utilisent leur propre domaine")
-            }
-        }
-
-        // 3. TLD suspect
-        val suspiciousTld = SUSPICIOUS_TLDS.firstOrNull { domain.endsWith(it) }
-        if (suspiciousTld != null) {
-            score += 1
-            reasons.add("L'adresse de l'expéditeur utilise une extension inhabituelle ($suspiciousTld)")
-        }
-
-        // 4. Domaine très long
-        if (domain.length > 25) {
-            score += 1
-            reasons.add("Le domaine de l'expéditeur est inhabituellement long")
-        }
-
-        // 5. Beaucoup de chiffres dans le domaine
-        val digitCount = domain.count { it.isDigit() }
-        if (digitCount > 3) {
-            score += 1
-            reasons.add("L'adresse de l'expéditeur contient beaucoup de chiffres")
-        }
+        val suspTld = SUSPICIOUS_TLDS.firstOrNull { domain.endsWith(it) }
+        if (suspTld != null) { score += 1; reasons.add(sp?.getString(R.string.reason_email_suspicious_tld, suspTld) ?: "L'adresse de l'expéditeur utilise une extension inhabituelle ($suspTld)") }
+        if (domain.length > 25) { score += 1; reasons.add(sp?.getString(R.string.reason_email_long_domain) ?: "Le domaine de l'expéditeur est inhabituellement long") }
+        if (domain.count { it.isDigit() } > 3) { score += 1; reasons.add(sp?.getString(R.string.reason_email_many_digits) ?: "L'adresse de l'expéditeur contient beaucoup de chiffres") }
 
         return Pair(score, reasons)
     }
 
-    /**
-     * Vérifie si une adresse email a un format valide.
-     */
-    fun isValidEmail(email: String): Boolean {
-        return email.isBlank() || EMAIL_REGEX.matches(email.trim())
-    }
+    fun isValidEmail(email: String): Boolean = email.isBlank() || EMAIL_REGEX.matches(email.trim())
 }

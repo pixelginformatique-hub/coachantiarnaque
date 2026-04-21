@@ -9,6 +9,7 @@ import com.coachantiarnaque.data.repository.MessageRepository
 import com.coachantiarnaque.domain.engine.EmailAnalysisEngine
 import com.coachantiarnaque.domain.engine.EmailAnalysisResult
 import com.coachantiarnaque.domain.model.ResultType
+import com.coachantiarnaque.utils.StringProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,6 +22,7 @@ class EmailAnalysisViewModel(application: Application) : AndroidViewModel(applic
 
     private val engine = EmailAnalysisEngine()
     private val repository: MessageRepository
+    private val sp = StringProvider(application)
 
     private val _result = MutableStateFlow<EmailAnalysisResult?>(null)
     val result: StateFlow<EmailAnalysisResult?> = _result.asStateFlow()
@@ -74,7 +76,7 @@ class EmailAnalysisViewModel(application: Application) : AndroidViewModel(applic
             _analyzedSender.value = senderEmail
 
             try {
-                val analysisResult = engine.analyze(content, senderEmail)
+                val analysisResult = engine.analyze(content, senderEmail, sp)
                 _result.value = analysisResult
 
                 // Sauvegarder dans l'historique
